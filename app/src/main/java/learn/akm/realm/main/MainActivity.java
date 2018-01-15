@@ -20,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     FloatingActionButton fab;
     @BindView(R.id.anime_list)
     RecyclerView animeList;
+
     private AnimeListAdapter animeListAdapter;
 
     @Override
