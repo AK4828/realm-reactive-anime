@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent_white_1">#11ffffff</color>
+    <color name="transparent_white_2">#22ffffff</color>
+    <color name="transparent_white_3">#33ffffff</color>
+    <color name="transparent_white_4">#44ffffff</color>
+    <color name="transparent_white_5">#55ffffff</color>
+    <color name="transparent_white_6">#66ffffff</color>
+    <color name="transparent_white_7">#77ffffff</color>
+    <color name="transparent_white_8">#88ffffff</color>
+    <color name="transparent_white_9">#99ffffff</color>
+    <color name="transparent_white_10">#aaffffff</color>
+    <color name="transparent_white_11">#bbffffff</color>
+    <color name="transparent_white_12">#ccffffff</color>
+    <color name="transparent_white_13">#ddffffff</color>
+    <color name="transparent_white_14">#eeffffff</color>
+    <color name="transparent_white_15">#ffffffff</color>
+    <color name="transparent_white_16">#80ffffff</color>
+    <color name="transparent_white_17">#A0ffffff</color>
+</resources>
