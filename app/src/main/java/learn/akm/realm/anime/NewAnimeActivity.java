@@ -75,8 +75,7 @@ public class NewAnimeActivity extends AppCompatActivity {
                     nextId = currentId.intValue() + 1;
                 }
 
-                Anime anime = realm.createObject(Anime.class);
-                anime.setId(nextId);
+                Anime anime = realm.createObject(Anime.class, nextId);
                 anime.setTittle(titleInput.getText().toString());
                 anime.setGenre(genreInput.getText().toString());
                 anime.setDescription(descriptionInput.getText().toString());
@@ -85,6 +84,7 @@ public class NewAnimeActivity extends AppCompatActivity {
                 Toast.makeText(NewAnimeActivity.this, getResources().getString(R.string.label_success_save), Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(NewAnimeActivity.this, MainActivity.class));
             }, error -> {
+                error.printStackTrace();
                 Snackbar snackbar = Snackbar.make(mainCoordinator, getResources().getString(R.string.label_fail_save), Snackbar.LENGTH_LONG);
                 snackbar.show();
             });
