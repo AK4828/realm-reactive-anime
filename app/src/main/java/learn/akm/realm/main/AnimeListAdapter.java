@@ -39,6 +39,7 @@ public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.Anim
     public void onBindViewHolder(AnimeListViewHolder holder, int position) {
         Anime anime = animeList.get(position);
         holder.animeTittle.setText(anime.getTittle());
+        holder.animeGenre.setText(anime.getGenre());
         holder.animeDescription.setText(anime.getDescription());
 
         holder.itemView.setOnClickListener(v -> {
