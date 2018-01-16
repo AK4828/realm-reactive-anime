@@ -1,5 +1,6 @@
 package learn.akm.realm.main;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmResults;
 import learn.akm.realm.R;
+import learn.akm.realm.anime.NewAnimeActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -56,6 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
     @OnClick(R.id.fab)
     public void onClickAdd() {
-
+        startActivity(new Intent(this, NewAnimeActivity.class));
     }
 }

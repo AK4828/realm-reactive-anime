@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">My Anime List</string>
+
+    //defaults
+    <string name="label_save">Save</string>
+    <string name="label_ok">OK</string>
+    <string name="label_cancel">Cancel</string>
+    <string name="label_delete">Delete</string>
+    <string name="label_close">Close</string>
+    <string name="label_open">Open</string>
+
+    //new anime
+    <string name="label_new_anime">My New Anime</string>
+    <string name="label_anime_tittle">Anime Title</string>
+    <string name="label_anime_genre">Genre</string>
+    <string name="label_anime_description">Description</string>
 </resources>
