@@ -2,6 +2,7 @@ package learn.akm.realm.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -28,7 +29,10 @@ public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.Anim
 
     @Override
     public AnimeListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+        View itemView = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.adapter_anime_list, parent, false);
+
+        return new AnimeListViewHolder(itemView);
     }
 
     @Override
