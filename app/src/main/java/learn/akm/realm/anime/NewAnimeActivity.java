@@ -103,8 +103,7 @@ public class NewAnimeActivity extends AppCompatActivity {
                     startActivity(new Intent(NewAnimeActivity.this, MainActivity.class));
                 }, error -> {
                     error.printStackTrace();
-                    Snackbar snackbar = Snackbar.make(mainCoordinator, getResources().getString(R.string.label_fail_save), Snackbar.LENGTH_LONG);
-                    snackbar.show();
+                    Toast.makeText(NewAnimeActivity.this, getResources().getString(R.string.label_fail_save), Toast.LENGTH_SHORT).show();
                 });
             } else {
 
