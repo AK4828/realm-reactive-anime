@@ -17,6 +17,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
+import io.realm.RealmChangeListener;
 import learn.akm.realm.R;
 import learn.akm.realm.main.Anime;
 import learn.akm.realm.main.MainActivity;
@@ -37,18 +38,34 @@ public class NewAnimeActivity extends AppCompatActivity {
     ConstraintLayout mainCoordinator;
 
     private Realm realm;
+    private Anime anime;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_anime);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         ButterKnife.bind(this);
-
         realm = Realm.getDefaultInstance();
+
+        int animeId = getIntent().getIntExtra("animeId", 0);
+        if (animeId != 0) {
+            anime = realm.where(Anime.class).equalTo("id", animeId).findFirst();
+            if (anime != null) {
+                titleInput.setText(anime.getTittle());
+                genreInput.setText(anime.getGenre());
+                descriptionInput.setText(anime.getDescription());
+            }
+        }
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            super.onBackPressed();
+        }
         return super.onOptionsItemSelected(item);
     }
 
@@ -66,28 +83,41 @@ public class NewAnimeActivity extends AppCompatActivity {
         }
 
         if (isvalid) {
-            realm.executeTransactionAsync(realm -> {
-                Number currentId = realm.where(Anime.class).max("id");
-                int nextId;
-                if (currentId == null) {
-                    nextId = 1;
-                } else {
-                    nextId = currentId.intValue() + 1;
-                }
+            if (anime == null) {
+                realm.executeTransactionAsync(realm -> {
+                    Number currentId = realm.where(Anime.class).max("id");
+                    int nextId;
+                    if (currentId == null) {
+                        nextId = 1;
+                    } else {
+                        nextId = currentId.intValue() + 1;
+                    }
 
-                Anime anime = realm.createObject(Anime.class, nextId);
+                    Anime newAnime = realm.createObject(Anime.class, nextId);
+                    newAnime.setTittle(titleInput.getText().toString());
+                    newAnime.setGenre(genreInput.getText().toString());
+                    newAnime.setDescription(descriptionInput.getText().toString());
+
+                }, () -> {
+                    Toast.makeText(NewAnimeActivity.this, getResources().getString(R.string.label_success_save), Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(NewAnimeActivity.this, MainActivity.class));
+                }, error -> {
+                    error.printStackTrace();
+                    Snackbar snackbar = Snackbar.make(mainCoordinator, getResources().getString(R.string.label_fail_save), Snackbar.LENGTH_LONG);
+                    snackbar.show();
+                });
+            } else {
+
+                realm.beginTransaction();
                 anime.setTittle(titleInput.getText().toString());
                 anime.setGenre(genreInput.getText().toString());
                 anime.setDescription(descriptionInput.getText().toString());
+                realm.insertOrUpdate(anime);
+                realm.commitTransaction();
 
-            }, () -> {
-                Toast.makeText(NewAnimeActivity.this, getResources().getString(R.string.label_success_save), Toast.LENGTH_SHORT).show();
-                startActivity(new Intent(NewAnimeActivity.this, MainActivity.class));
-            }, error -> {
-                error.printStackTrace();
-                Snackbar snackbar = Snackbar.make(mainCoordinator, getResources().getString(R.string.label_fail_save), Snackbar.LENGTH_LONG);
-                snackbar.show();
-            });
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+            }
         }
     }
 }

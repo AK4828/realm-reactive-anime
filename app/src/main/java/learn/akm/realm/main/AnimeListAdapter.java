@@ -1,6 +1,7 @@
 package learn.akm.realm.main;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +14,7 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import learn.akm.realm.R;
+import learn.akm.realm.anime.NewAnimeActivity;
 
 /**
  * Created by AKM on 1/15/18.
@@ -43,7 +45,9 @@ public class AnimeListAdapter extends RecyclerView.Adapter<AnimeListAdapter.Anim
         holder.animeDescription.setText(anime.getDescription());
 
         holder.itemView.setOnClickListener(v -> {
-
+            Intent intent = new Intent(context, NewAnimeActivity.class);
+            intent.putExtra("animeId", anime.getId());
+            context.startActivity(intent);
         });
 
     }
