@@ -16,6 +16,14 @@ public class Anime extends RealmObject {
     private String genre;
 
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getTittle() {
         return tittle;
     }

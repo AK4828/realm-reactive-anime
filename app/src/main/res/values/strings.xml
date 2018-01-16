@@ -14,4 +14,8 @@
     <string name="label_anime_tittle">Anime Title</string>
     <string name="label_anime_genre">Genre</string>
     <string name="label_anime_description">Description</string>
+    <string name="label_title_empty_warning">Title Must Be Filled</string>
+    <string name="label_genre_empty_warning">Genre Must Be Filled</string>
+    <string name="label_success_save">Your Anime List Updated</string>
+    <string name="label_fail_save">An Error occured</string>
 </resources>
