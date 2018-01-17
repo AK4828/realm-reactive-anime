@@ -107,7 +107,6 @@ public class NewAnimeActivity extends AppCompatActivity {
                     Toast.makeText(NewAnimeActivity.this, getResources().getString(R.string.label_fail_save), Toast.LENGTH_SHORT).show();
                 });
             } else {
-
                 realm.executeTransaction(realm -> {
                     anime.setTittle(titleInput.getText().toString());
                     anime.setGenre(genreInput.getText().toString());
