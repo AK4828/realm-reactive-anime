@@ -101,21 +101,22 @@ public class NewAnimeActivity extends AppCompatActivity {
                 }, () -> {
                     Toast.makeText(NewAnimeActivity.this, getResources().getString(R.string.label_success_save), Toast.LENGTH_SHORT).show();
                     startActivity(new Intent(NewAnimeActivity.this, MainActivity.class));
+                    realm.close();
                 }, error -> {
                     error.printStackTrace();
                     Toast.makeText(NewAnimeActivity.this, getResources().getString(R.string.label_fail_save), Toast.LENGTH_SHORT).show();
                 });
             } else {
 
-                realm.beginTransaction();
-                anime.setTittle(titleInput.getText().toString());
-                anime.setGenre(genreInput.getText().toString());
-                anime.setDescription(descriptionInput.getText().toString());
-                realm.insertOrUpdate(anime);
-                realm.commitTransaction();
+                realm.executeTransaction(realm -> {
+                    anime.setTittle(titleInput.getText().toString());
+                    anime.setGenre(genreInput.getText().toString());
+                    anime.setDescription(descriptionInput.getText().toString());
+                    realm.insertOrUpdate(anime);
 
-                startActivity(new Intent(this, MainActivity.class));
-                finish();
+                    startActivity(new Intent(NewAnimeActivity.this, MainActivity.class));
+                    realm.close();
+                });
             }
         }
     }
